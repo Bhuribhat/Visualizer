@@ -1,24 +1,16 @@
-"""
-This prgram show the shortest path of two point
-Instruction:
-1. left click      : create two points to find the shortest path (2 times)
-2. drag left click : draw a obsticle line
-3. right click     : erase those two points or point from line (click/drag)
-4. space bar       : show result
-5. c               : clear path
-6. r               : restart  
-7. p               : pause    """
-
-from queue import PriorityQueue
-import numpy as np
-import random
-import time
 import sys
+import time
+import random
 import pygame
+import numpy as np
+
 import heapq
+from queue import PriorityQueue
+
 
 # Initial Game UI
 pygame.init()
+
 INF = sys.maxsize
 ROWS = 50
 WIDTH = 800
@@ -42,6 +34,7 @@ TURQUOISE = (64, 224, 208)
 LARGE_FONT = pygame.font.SysFont('comicsans', 30)
 SMALL_FONT = pygame.font.SysFont('comicsans', 20)
 
+
 class Spot:
     def __init__(self, row, col, width, total_rows):
         self.row = row
@@ -56,10 +49,10 @@ class Spot:
     def get_pos(self):
         return self.row, self.col
 
-    def is_closed(self):  # already visited
+    def is_closed(self):   # already visited
         return self.color == ORANGE
 
-    def is_open(self):    # will be considered
+    def is_open(self):     # will be considered
         return self.color == GREEN
 
     def is_barrier(self):  # obstacle
@@ -100,28 +93,31 @@ class Spot:
         if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].is_barrier():  # DOWN
             self.neighbors.append(grid[self.row + 1][self.col])
 
-        if self.row > 0 and not grid[self.row - 1][self.col].is_barrier():                   # UP
+        if self.row > 0 and not grid[self.row - 1][self.col].is_barrier():                    # UP
             self.neighbors.append(grid[self.row - 1][self.col])
 
         if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].is_barrier():  # RIGHT
             self.neighbors.append(grid[self.row][self.col + 1])
 
-        if self.col > 0 and not grid[self.row][self.col - 1].is_barrier():                   # LEFT
+        if self.col > 0 and not grid[self.row][self.col - 1].is_barrier():                    # LEFT
             self.neighbors.append(grid[self.row][self.col - 1])
 
     def __lt__(self, other):  # other spot > current
         return False
 
+
 # draw shortest path that's found by algorithm
 def reconstruct_path(came_from, current, draw):
     global length
     while current in came_from:
-        if came_from[current].is_start(): return
+        if came_from[current].is_start():
+            return
         current = came_from[current]
         current.make_path()
         draw()
         length += 1
     length = length + 2
+
 
 # Breath-First-Search Algorithm
 def BFS(draw, grid, start, end):
@@ -156,8 +152,9 @@ def BFS(draw, grid, start, end):
             end.make_end()
             return True
 
+        # all weights in grid is 1
         for neighbor in current.neighbors:
-            temp_dist = distance[current] + 1  # all weights in grid = 1
+            temp_dist = distance[current] + 1  
 
             # find optimal path
             if temp_dist < distance[neighbor]:
@@ -166,7 +163,7 @@ def BFS(draw, grid, start, end):
                 if neighbor not in visited:
                     queue.append((distance[neighbor], neighbor))
                     visited.add(neighbor)
-                    neighbor.make_open()       # green
+                    neighbor.make_open()
 
         # update grid
         draw()
@@ -177,6 +174,7 @@ def BFS(draw, grid, start, end):
 
     # no path exist
     return False
+
 
 # Shortest Path Algorithm
 def Dijkstra(draw, grid, start, end):
@@ -204,7 +202,8 @@ def Dijkstra(draw, grid, start, end):
         # current node
         dist, current = heapq.heappop(queue)
         visited.remove(current)
-        if distance[current] < dist: continue
+        if distance[current] < dist:
+            continue
 
         # found shortest path
         if current == end:
@@ -212,8 +211,9 @@ def Dijkstra(draw, grid, start, end):
             end.make_end()
             return True
 
+        # all weights in grid is 1
         for neighbor in current.neighbors:
-            temp_dist = distance[current] + 1  # all weights in grid = 1
+            temp_dist = distance[current] + 1
 
             # find optimal path
             if temp_dist > distance[neighbor] + dist:
@@ -237,11 +237,13 @@ def Dijkstra(draw, grid, start, end):
     # no path exist
     return False
 
+
 # heuristic function: estimate distance from n to end node
 def h(p1, p2):
-    x1, y1 = p1
-    x2, y2 = p2
+    (x1, y1) = p1
+    (x2, y2) = p2
     return abs(x1 - x2) + abs(y1 - y2)
+
 
 # F(n) = h(n) + g(n): heauristic + shortest from start to n
 def A_Star(draw, grid, start, end):
@@ -280,19 +282,22 @@ def A_Star(draw, grid, start, end):
             end.make_end()
             return True
 
+        # all weights in grid is 1
         for neighbor in current.neighbors:
-            temp_g_score = g_score[current] + 1  # all weights in grid = 1
+            temp_g_score = g_score[current] + 1
 
             # find optimal path
             if temp_g_score < g_score[neighbor]:
                 came_from[neighbor] = current
+                heuristic = h(neighbor.get_pos(), end.get_pos())
+
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + h(neighbor.get_pos(), end.get_pos())
+                f_score[neighbor] = temp_g_score + heuristic
                 if neighbor not in open_set_hash:
                     count += 1
                     open_set.put((f_score[neighbor], count, neighbor))
                     open_set_hash.add(neighbor)
-                    neighbor.make_open()         # green
+                    neighbor.make_open()
 
         # update grid
         draw()
@@ -304,6 +309,7 @@ def A_Star(draw, grid, start, end):
     # no path exist
     return False
 
+
 # initial grid
 def make_grid(rows, width):
     grid = [[] for _ in range(rows)]
@@ -313,9 +319,11 @@ def make_grid(rows, width):
             spot = Spot(i, j, gap, rows)
             grid[i].append(spot)
     for row in range(len(grid)):
-        if row == 0: continue
+        if row == 0:
+            continue
         grid[row][8].make_barrier()
     return grid
+
 
 # draw grid lines
 def draw_grid(win, rows, width):
@@ -324,6 +332,7 @@ def draw_grid(win, rows, width):
         pygame.draw.line(win, BLACK, (0, i * gap), (width, i * gap))
         for j in range(rows):
             pygame.draw.line(win, BLACK, (j * gap, 0), (j * gap, width))
+
 
 # draw font and list animation
 def draw_UI(window, algo_name, time, length):
@@ -339,6 +348,7 @@ def draw_UI(window, algo_name, time, length):
     path = SMALL_FONT.render(algo, 1, RED)
     window.blit(path, (WIDTH / 2 - path.get_width() / 2, 100))
 
+
 # draw everything
 def draw(win, grid, rows, width, name, timeUse, length):
     win.fill(GREY)
@@ -349,8 +359,9 @@ def draw(win, grid, rows, width, name, timeUse, length):
     draw_UI(win, name, timeUse, length)
     pygame.display.update()
 
+
 # draw perfect maze
-def generate_maze(grid, size = ROWS // 3):
+def generate_maze(grid, size=ROWS // 3):
     N, P = (1, 0.5)
     grid = np.random.binomial(N, P, size=(size, size))
     output_grid = np.empty([ROWS, ROWS], dtype=str)
@@ -373,6 +384,7 @@ def generate_maze(grid, size = ROWS // 3):
         j = 0
     return output_grid
 
+
 # draw obstacle randomly
 def random_obstacle(grid):
     for row in grid:
@@ -381,19 +393,20 @@ def random_obstacle(grid):
             if rnd == 4:
                 spot.make_barrier()
     for row in range(len(grid)):
-        if row == 0: continue
+        if row == 0:
+            continue
         grid[row][8].make_barrier()
     return grid
+
 
 # get node position
 def get_clicked_pos(pos, rows, width):
     gap = width // rows
     y, x = pos
-
     row = y // gap
     col = x // gap
-
     return row, col
+
 
 def main(win, width):
     global stop, length
@@ -401,8 +414,10 @@ def main(win, width):
     grid = make_grid(ROWS, width)
     start, end = (None, None)
 
-    command = 'A'; name = 'A*'
-    timeUse = 0; length = 0
+    command = 'A'
+    name = 'A*'
+    timeUse = 0
+    length = 0
 
     run = True
     while run:
@@ -460,7 +475,7 @@ def main(win, width):
                     timeUse = round(endTime - startTime, 2)
                     print(f"{name} Algorithm took {timeUse:.2f} seconds")
 
-                if event.key == pygame.K_r or stop: # R
+                if event.key == pygame.K_r or stop:  # Restart
                     timeUse = 0
                     start = None
                     end = None
@@ -468,21 +483,21 @@ def main(win, width):
                     length = 0
                     stop = False
 
-                if event.key == pygame.K_c:         # C
+                if event.key == pygame.K_c:          # Clear path
                     for row in grid:
                         for spot in row:
-                            if spot.is_start() or spot.is_end(): 
+                            if spot.is_start() or spot.is_end():
                                 continue
-                            if not spot.is_barrier(): 
+                            if not spot.is_barrier():
                                 spot.reset()
 
-                if event.key == pygame.K_n:         # N
+                if event.key == pygame.K_n:          # N - Generate new obstacles
                     start = None
                     end = None
                     grid = make_grid(ROWS, width)
                     grid = random_obstacle(grid)
 
-                if event.key == pygame.K_m:         # M
+                if event.key == pygame.K_m:          # M - Generate new Maze
                     start = None
                     end = None
                     grid = make_grid(ROWS, width)
@@ -496,19 +511,21 @@ def main(win, width):
                     for row in range(1, len(grid) - 1):
                         for spot in range(1, ROWS - 1):
                             if grid[row][spot].is_barrier():
-                                checkLeft  = not grid[row - 1][spot].is_barrier()
+                                checkLeft = not grid[row - 1][spot].is_barrier()
                                 checkRight = not grid[row + 1][spot].is_barrier()
-                                checkUp    = not grid[row][spot - 1].is_barrier()
-                                checkDown  = not grid[row][spot + 1].is_barrier()
+                                checkUp = not grid[row][spot - 1].is_barrier()
+                                checkDown = not grid[row][spot + 1].is_barrier()
                                 checks = checkLeft and checkRight and checkUp and checkDown
-                                if not checks: continue
+                                if not checks:
+                                    continue
                                 temp = row
                                 while not grid[temp + 1][spot].is_barrier():
                                     grid[temp + 1][spot].make_barrier()
                                     temp += 1
 
                     for row in range(len(grid)):
-                        if row == 0: continue
+                        if row == 0:
+                            continue
                         grid[row][8].make_barrier()
                         grid[row][-1].make_barrier()
 
@@ -518,17 +535,17 @@ def main(win, width):
                     for row in range(37, len(grid) - 1):
                         grid[row][9].reset()
 
-                if event.key == pygame.K_a:         # A
+                if event.key == pygame.K_a:          # A - A*
                     command = 'A'
                     name = 'A*'
                     print(f"Now Using {name} Algorithm")
 
-                if event.key == pygame.K_b:         # B
+                if event.key == pygame.K_b:          # B - BFS
                     command = 'B'
                     name = 'BFS'
                     print(f"Now Using {name} Algorithm")
 
-                if event.key == pygame.K_d:         # D
+                if event.key == pygame.K_d:          # D - Dijkstra
                     command = 'D'
                     name = "Dijkstra"
                     print(f"Now Using {name} Algorithm")
