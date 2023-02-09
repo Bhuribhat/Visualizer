@@ -1,9 +1,11 @@
 import time
 import pygame
+
 from utils.board import generate_sudoku
 pygame.font.init()
 
 
+# Constant
 WHITE = (255, 255, 255)
 GREY = (128, 128, 128)
 DARK = (49, 49, 49)

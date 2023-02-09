@@ -26,6 +26,7 @@ This program show the shortest path between two point
     <img src="./assets/path_finding.png" height="400" />
 </p>
 
+
 # Sort Algorithm
 
 This program compare the sorting algorithms  
@@ -81,8 +82,30 @@ This program generate sudoku board and its solution
     <img src="./assets/sudoku_solution.png" height="400" />
 </p>
 
+
+# Tic Tac Toe
+
+Minimax algorithm: backtracking decision making to find the optimal move  
+**Instruction:**
+
+1. press <kbd>g</kbd> to change gamemode (pvp or ai)
+1. press <kbd>0</kbd> to change ai level to 0 (random)
+1. press <kbd>1</kbd> to change ai level to 1 (impossible)
+1. press <kbd>r</kbd> to restart the game
+
+**Usage:**
+
+```sh
+>> py XO.py
+```
+
+<p align="left">
+    <img src="./assets/xo_gameplay.png" height="400" />
+    <img src="./assets/xo_result.png" height="400" />
+</p>
+
 # Resource
 
 - [tech with tim sorting algorithm](https://www.youtube.com/watch?v=twRidO-_vqQ)
 - [tech with tim path finding algorithm](https://www.youtube.com/watch?v=JtiK0DOeI4A)
-- [Python maze search](https://github.com/marblexu/PythonMazeSearch) 
+- [Python maze search](https://github.com/marblexu/PythonMazeSearch)
