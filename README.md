@@ -28,20 +28,20 @@ This program show the shortest path between two point
 
 # Sort Algorithm
 
-This program show the sorting visualization data  
+This program compare the sorting algorithms  
 **Instruction:**
 
-1.  <kbd>space bar</kbd> to show result
-1.  <kbd>r</kbd> to reset
-1.  <kbd>a</kbd> to set to ascending order
-1.  <kbd>d</kbd> to set to descending order
-1.  <kbd>i</kbd> to use __Insertion__ Sort Algorithm
-1.  <kbd>b</kbd> to use __Bubble__ Sort Algorithm
-1.  <kbd>s</kbd> to use __Selection__ Sort Algorithm
-1.  <kbd>e</kbd> to use __Shell__ Sort Algorithm
-1.  <kbd>h</kbd> to use __Heap__ Sort Algorithm
-1.  <kbd>m</kbd> to use __Merge__ Sort Algorithm
-1.  <kbd>q</kbd> to use __Quick__ Sort Algorithm
+1. <kbd>Space Bar</kbd> to show result
+1. <kbd>R</kbd> to reset
+1. <kbd>A</kbd> to set to ascending order
+1. <kbd>D</kbd> to set to descending order
+1. <kbd>I</kbd> to use __Insertion__ Sort Algorithm
+1. <kbd>B</kbd> to use __Bubble__ Sort Algorithm
+1. <kbd>S</kbd> to use __Selection__ Sort Algorithm
+1. <kbd>E</kbd> to use __Shell__ Sort Algorithm
+1. <kbd>H</kbd> to use __Heap__ Sort Algorithm
+1. <kbd>M</kbd> to use __Merge__ Sort Algorithm
+1. <kbd>Q</kbd> to use __Quick__ Sort Algorithm
 
 **Usage:**
 
@@ -50,13 +50,39 @@ This program show the sorting visualization data
 ```
 
 <p align="left">
-    <img src="./assets/sort_gameplay.png" height="400" />
-    <img src="./assets/sort_result.png" height="400" />
+    <img src="./assets/sort_gameplay.png" width="400" />
+    <img src="./assets/sort_result.png" width="400" />
 </p>
 
+
+# Sudoku
+
+This program generate sudoku board and its solution  
+**Instruction:**
+
+1. <kbd>Click</kbd> to select the grid
+2. <kbd>1-9</kbd> to sketch number and <kbd>Enter</kbd> to confirm
+3. <kbd>Del</kbd> to delete sketch
+4. <kbd>I</kbd> to view instruction
+5. <kbd>C</kbd> to clear all sketch
+6. <kbd>R</kbd> to reset board
+7. <kbd>N</kbd> to create new game
+8. <kbd>Space Bar</kbd> to show solution (sketch)
+9. <kbd>&uarr;</kbd>, <kbd>&rarr;</kbd>, <kbd>&darr;</kbd>, <kbd>&larr;</kbd> to navigate through grid 
+
+**Usage:**
+
+```sh
+>> py Sudoku.py
+```
+
+<p align="left">
+    <img src="./assets/sudoku_gameplay.png" height="400" />
+    <img src="./assets/sudoku_solution.png" height="400" />
+</p>
 
 # Resource
 
 - [tech with tim sorting algorithm](https://www.youtube.com/watch?v=twRidO-_vqQ)
 - [tech with tim path finding algorithm](https://www.youtube.com/watch?v=JtiK0DOeI4A)
-- [Python maze search](https://github.com/marblexu/PythonMazeSearch)
+- [Python maze search](https://github.com/marblexu/PythonMazeSearch) 

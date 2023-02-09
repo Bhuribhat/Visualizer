@@ -5,7 +5,7 @@ import random
 import pygame
 
 from queue import PriorityQueue
-from Maze import generate_maze
+from utils.Maze import generate_maze
 
 
 # Initial Game UI
