@@ -1,7 +1,7 @@
 import time
 import pygame
 
-from utils.board import generate_sudoku
+from utils.Sudoku_Board import generate_sudoku
 pygame.font.init()
 
 
@@ -183,27 +183,24 @@ def format_time(secs):
     return total
 
 
-# display Sudoku solution
-def show_solution(solution):
+# display solution
+def print_board(solution):
     count, col = 0, 0
     edge = '+' + '-' * 7
-    represent = ""
+    print('Solution')
+    print('\n' + edge * 3 + '+')
     for row in solution:
         for num in row:
-            represent += str(num)
-    print("Solution:")
-    print('\n' + edge * 3 + '+')
-    for num in represent:
-        if count == 9:
-            print('|')
-            count = 0
-            col += 1
-            if col % 3 == 0:
-                print(edge * 3 + '+')
-        if count % 3 == 0:
-            print('|', end=' ')
-        count += 1
-        print(num, end=' ')
+            if count == 9:
+                print('|')
+                count = 0
+                col += 1
+                if col % 3 == 0:
+                    print(edge * 3 + '+')
+            if count % 3 == 0:
+                print('|', end=' ')
+            count += 1
+            print(num, end=' ')
     print('|\n' + edge * 3 + '+')
 
 
