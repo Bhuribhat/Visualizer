@@ -390,6 +390,7 @@ def main(win, width):
 
     command = 'A'
     name = 'A*'
+
     timeUse = 0
     length = 0
 
@@ -478,10 +479,14 @@ def main(win, width):
                     maze = generate_maze(ROWS, ROWS)
 
                     for row in range(len(maze)):
-                        for col in range(ROWS):
-                            if maze[row][col] != 'w':
-                                grid[row][col].make_barrier()
-                        # grid[row][-1].make_barrier()
+                        for col in range(len(maze[row]) - 2):
+                            if maze[row][col] == 1:
+                                grid[row][col + 2].make_barrier()
+
+                    # Handle right-side error
+                    for row in range(len(maze)):
+                        if not grid[-3][row].is_barrier:
+                            grid[-2][row].reset()
 
                 if event.key == pygame.K_a:          # A - A*
                     command = 'A'

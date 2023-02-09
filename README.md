@@ -108,4 +108,5 @@ Minimax algorithm: backtracking decision making to find the optimal move
 
 - [tech with tim sorting algorithm](https://www.youtube.com/watch?v=twRidO-_vqQ)
 - [tech with tim path finding algorithm](https://www.youtube.com/watch?v=JtiK0DOeI4A)
+- [Prim Algorithm](https://medium.com/swlh/fun-with-python-1-maze-generator-931639b4fb7e)
 - [Python maze search](https://github.com/marblexu/PythonMazeSearch)
