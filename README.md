@@ -1,4 +1,4 @@
-# Path Algorithm
+# Path Finding Algorithm
 
 This program show the shortest path between two point  
 **Instruction:**

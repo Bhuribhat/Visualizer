@@ -478,10 +478,10 @@ def main(win, width):
                     maze = generate_maze(ROWS, ROWS)
 
                     for row in range(len(maze)):
-                        for col in range(ROWS - 9):
-                            if maze[row][col] == 1:
-                                grid[row][col + 9].make_barrier()
-                        grid[row][-1].make_barrier()
+                        for col in range(ROWS):
+                            if maze[row][col] != 'w':
+                                grid[row][col].make_barrier()
+                        # grid[row][-1].make_barrier()
 
                 if event.key == pygame.K_a:          # A - A*
                     command = 'A'
