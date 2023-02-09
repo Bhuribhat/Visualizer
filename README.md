@@ -88,9 +88,9 @@ This program generate sudoku board and its solution
 Minimax algorithm: backtracking decision making to find the optimal move  
 **Instruction:**
 
-1. press <kbd>g</kbd> to change gamemode (pvp or ai)
-1. press <kbd>0</kbd> to change ai level to 0 (random)
-1. press <kbd>1</kbd> to change ai level to 1 (impossible)
+1. press <kbd>g</kbd> to change gamemode (__pvp/ai__)
+1. press <kbd>0</kbd> to change ai level to 0 (__random algorithm__)
+1. press <kbd>1</kbd> to change ai level to 1 (__minimax algorithm__)
 1. press <kbd>r</kbd> to restart the game
 
 **Usage:**
