@@ -1,11 +1,11 @@
 import sys
 import time
+import heapq
 import random
 import pygame
-import numpy as np
 
-import heapq
 from queue import PriorityQueue
+from Maze import generate_maze
 
 
 # Initial Game UI
@@ -318,9 +318,7 @@ def make_grid(rows, width):
         for j in range(rows):
             spot = Spot(i, j, gap, rows)
             grid[i].append(spot)
-    for row in range(len(grid)):
-        if row == 0:
-            continue
+    for row in range(1, len(grid)):
         grid[row][8].make_barrier()
     return grid
 
@@ -341,7 +339,8 @@ def draw_UI(window, algo_name, time, length):
     title = LARGE_FONT.render(f"{algo_name} | Shortest Path = {length} | Take {time} seconds", 1, BLUE)
     window.blit(title, (WIDTH / 2 - title.get_width() / 2, 5))
 
-    controls = SMALL_FONT.render("R - Reset | SPACE - Show Result | Left Click - Create | Right Click - Delete", 1, YELLOW)
+    controls = "R - Reset | SPACE - Show Result | Left Click - Create | Right Click - Delete"
+    controls = SMALL_FONT.render(controls, 1, YELLOW)
     window.blit(controls, (WIDTH / 2 - controls.get_width() / 2, 60))
 
     algo = "A - A* | B - BFS | D - Dijkstra | C - Clear Path | N - Obstacle | M - Maze"
@@ -358,31 +357,6 @@ def draw(win, grid, rows, width, name, timeUse, length):
     draw_grid(win, rows, width)
     draw_UI(win, name, timeUse, length)
     pygame.display.update()
-
-
-# draw perfect maze
-def generate_maze(grid, size=ROWS // 3):
-    N, P = (1, 0.5)
-    grid = np.random.binomial(N, P, size=(size, size))
-    output_grid = np.empty([ROWS, ROWS], dtype=str)
-    output_grid[:] = '#'
-    i, j = (0, 0)
-    while i < size:
-        w = i * 3 + 1
-        while j < size:
-            k = j * 3 + 1
-            toss = grid[j][i]
-            output_grid[w, k] = ' '
-            if toss == 0 and k + 2 <= ROWS:
-                output_grid[w, k + 1] = ' '
-                output_grid[w, k + 2] = ' '
-            if toss == 1 and w - 2 >= 0:
-                output_grid[w - 1, k] = ' '
-                output_grid[w - 2, k] = ' '
-            j = j + 1
-        i = i + 1
-        j = 0
-    return output_grid
 
 
 # draw obstacle randomly
@@ -473,7 +447,7 @@ def main(win, width):
                     # display algorihm tme
                     endTime = time.time()
                     timeUse = round(endTime - startTime, 2)
-                    print(f"{name} Algorithm took {timeUse:.2f} seconds")
+                    print(f"{name} Algorithm took {timeUse} seconds")
 
                 if event.key == pygame.K_r or stop:  # Restart
                     timeUse = 0
@@ -501,39 +475,13 @@ def main(win, width):
                     start = None
                     end = None
                     grid = make_grid(ROWS, width)
-                    maze = generate_maze(grid)
+                    maze = generate_maze(ROWS, ROWS)
 
                     for row in range(len(maze)):
-                        for spot in range(ROWS):
-                            if maze[row][spot] == ' ':
-                                grid[row][spot].make_barrier()
-
-                    for row in range(1, len(grid) - 1):
-                        for spot in range(1, ROWS - 1):
-                            if grid[row][spot].is_barrier():
-                                checkLeft = not grid[row - 1][spot].is_barrier()
-                                checkRight = not grid[row + 1][spot].is_barrier()
-                                checkUp = not grid[row][spot - 1].is_barrier()
-                                checkDown = not grid[row][spot + 1].is_barrier()
-                                checks = checkLeft and checkRight and checkUp and checkDown
-                                if not checks:
-                                    continue
-                                temp = row
-                                while not grid[temp + 1][spot].is_barrier():
-                                    grid[temp + 1][spot].make_barrier()
-                                    temp += 1
-
-                    for row in range(len(grid)):
-                        if row == 0:
-                            continue
-                        grid[row][8].make_barrier()
+                        for col in range(ROWS - 9):
+                            if maze[row][col] == 1:
+                                grid[row][col + 9].make_barrier()
                         grid[row][-1].make_barrier()
-
-                    for col in range(ROWS):
-                        grid[-1][col].make_barrier()
-
-                    for row in range(37, len(grid) - 1):
-                        grid[row][9].reset()
 
                 if event.key == pygame.K_a:          # A - A*
                     command = 'A'

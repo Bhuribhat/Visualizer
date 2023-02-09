@@ -1,7 +1,9 @@
 import pygame
 import random
 import math
+
 pygame.init()
+
 
 class DrawInformation:
     BLACK = 0, 0, 0
@@ -27,7 +29,7 @@ class DrawInformation:
     def __init__(self, width, height, lst):
         self.window = pygame.display.set_mode((width, height))
         pygame.display.set_caption("Sorting Algorithm Visualization")
-        
+
         self.height = height
         self.width = width
         self.set_list(lst)
@@ -41,14 +43,17 @@ class DrawInformation:
         self.block_height = math.floor((self.height - self.TOP_PAD) / (self.max_val - self.min_val))
         self.start_x = self.SIDE_PAD // 2
 
+
 # draw font and list animation
 def draw(draw_info, algo_name, ascending):
     draw_info.window.fill(draw_info.BACKGROUND_COLOR)
 
-    title = draw_info.LARGE_FONT.render(f"{algo_name} - {'Ascending' if ascending else 'Descending'}", 1, draw_info.GREEN)
+    title = f"{algo_name} - {'Ascending' if ascending else 'Descending'}"
+    title = draw_info.LARGE_FONT.render(title, 1, draw_info.GREEN)
     draw_info.window.blit(title, (draw_info.width / 2 - title.get_width() / 2, 5))
 
-    controls = draw_info.FONT.render("R - Reset | SPACE - Start Sorting | A - Ascending | D - Descending", 1, draw_info.YELLOW)
+    controls = "R - Reset | SPACE - Start Sorting | A - Ascending | D - Descending"
+    controls = draw_info.FONT.render(controls, 1, draw_info.YELLOW)
     draw_info.window.blit(controls, (draw_info.width / 2 - controls.get_width() / 2, 55))
 
     algo1 = "I - Insertion Sort | B - Bubble Sort | S - Selection Sort | E - Shell Sort"
@@ -61,13 +66,17 @@ def draw(draw_info, algo_name, ascending):
     draw_list(draw_info)
     pygame.display.update()
 
+
 # draw list animation
 def draw_list(draw_info, color_positions={}, clear_bg=False):
     lst = draw_info.lst
 
     if clear_bg:
-        clear_rect = (draw_info.SIDE_PAD // 2, draw_info.TOP_PAD,
-                      draw_info.width - draw_info.SIDE_PAD, draw_info.height - draw_info.TOP_PAD)
+        clear_rect = (
+            draw_info.SIDE_PAD // 2, draw_info.TOP_PAD,
+            draw_info.width - draw_info.SIDE_PAD, 
+            draw_info.height - draw_info.TOP_PAD
+        )
         pygame.draw.rect(draw_info.window, draw_info.BACKGROUND_COLOR, clear_rect)
 
     for i, val in enumerate(lst):
@@ -81,7 +90,9 @@ def draw_list(draw_info, color_positions={}, clear_bg=False):
 
         pygame.draw.rect(draw_info.window, color, (x, y, draw_info.block_width, draw_info.height))
 
-    if clear_bg: pygame.display.update()
+    if clear_bg:
+        pygame.display.update()
+
 
 # Generate random number for sorting
 def generate_starting_list(N, min_val, max_val):
@@ -91,7 +102,8 @@ def generate_starting_list(N, min_val, max_val):
         lst.append(val)
     return lst
 
-""" Time Complexity: O(n * n) worst case if reverse sort | Best Case : O(n) """
+
+# Time Complexity: O(n * n) worst case if reverse sort | Best Case : O(n)
 def bubble_sort(draw_info, ascending=True):
     data = draw_info.lst
 
@@ -101,17 +113,20 @@ def bubble_sort(draw_info, ascending=True):
             num1 = data[j]
             num2 = data[j + 1]
 
+            # program will respond even when sorting
             if (num1 > num2 and ascending) or (num1 < num2 and not ascending):
                 data[j], data[j + 1] = data[j + 1], data[j]
                 swapped = True
                 draw_list(draw_info, {j: draw_info.GREEN, j + 1: draw_info.RED}, True)
-                yield True  # program will respond even when sorting
-        
-        if swapped == False: break
+                yield True
+
+        if swapped == False:
+            break
 
     return data
 
-""" Time Complexity: O(n ^ 2) """
+
+# Time Complexity: O(n ^ 2)
 def insertion_sort(draw_info, ascending=True):
     data = draw_info.lst
 
@@ -119,10 +134,11 @@ def insertion_sort(draw_info, ascending=True):
         current = data[i]
 
         while True:
-            ascending_sort  = i > 0 and data[i - 1] > current and ascending
+            ascending_sort = i > 0 and data[i - 1] > current and ascending
             descending_sort = i > 0 and data[i - 1] < current and not ascending
 
-            if not ascending_sort and not descending_sort: break
+            if not ascending_sort and not descending_sort:
+                break
 
             data[i] = data[i - 1]
             i = i - 1
@@ -132,10 +148,12 @@ def insertion_sort(draw_info, ascending=True):
 
     return data
 
-""" Time Complexity: O(n ^ 2) """
+
+# Time Complexity: O(n ^ 2)
 def selection_sort(draw_info, ascending=True):
     data = draw_info.lst
-    if len(data) == 1: return
+    if len(data) == 1:
+        return
 
     # Find minimum unsorted value
     for i in range(len(data)):
@@ -150,22 +168,26 @@ def selection_sort(draw_info, ascending=True):
         data[i], data[minIdx] = data[minIdx], data[i]
         draw_list(draw_info, {i: draw_info.GREEN, minIdx: draw_info.RED}, True)
         yield True
-    
+
     return data
 
-""" Time Complexity: O(n log(n)) """
+
+# Time Complexity: O(n log(n))
 def merge_sort(draw_info, ascending=True):
     data = draw_info.lst
     return mergesort(draw_info, data, 0, len(data) - 1, ascending)
 
+
 def mergesort(draw_info, data, start, end, ascending):
-    if end <= start: return
+    if end <= start:
+        return
 
     mid = start + ((end - start + 1) // 2) - 1
     yield from mergesort(draw_info, data, start, mid, ascending)
     yield from mergesort(draw_info, data, mid + 1, end, ascending)
     yield from merge(draw_info, data, start, mid, end, ascending)
     yield data
+
 
 # Helper function for merge sort
 def merge(draw_info, data, start, mid, end, ascending):
@@ -201,17 +223,20 @@ def merge(draw_info, data, start, mid, end, ascending):
         data[start + i] = sorted_val
         draw_list(draw_info, {i: draw_info.GREEN, start + i: draw_info.RED}, True)
         yield True
-    
+
     return merged
 
-""" Time Complexity: O(n ^ 2) """
+
+# Time Complexity: O(n ^ 2)
 def quick_sort(draw_info, ascending=True):
     data = draw_info.lst
     return quicksort(draw_info, data, 0, len(data) - 1, ascending)
 
+
 # helper function for quicksort
 def quicksort(draw_info, data, start, end, ascending):
-    if start >= end: return
+    if start >= end:
+        return
 
     pivot = data[end]
     pivotIdx = start
@@ -229,7 +254,8 @@ def quicksort(draw_info, data, start, end, ascending):
     yield from quicksort(draw_info, data, start, pivotIdx - 1, ascending)
     yield from quicksort(draw_info, data, pivotIdx + 1, end, ascending)
 
-""" Time Complexity: O(n ^ 2) """
+
+# Time Complexity: O(n ^ 2)
 def shell_sort(draw_info, ascending=True):
     data = draw_info.lst
     gap = len(data) // 2
@@ -238,9 +264,10 @@ def shell_sort(draw_info, ascending=True):
             temp = data[i]
             pos = i
             while True:
-                ascending_sort  = pos >= gap and data[pos - gap] > temp and ascending
+                ascending_sort = pos >= gap and data[pos - gap] > temp and ascending
                 descending_sort = pos >= gap and data[pos - gap] < temp and not ascending
-                if not ascending_sort and not descending_sort: break
+                if not ascending_sort and not descending_sort:
+                    break
                 data[pos] = data[pos - gap]
                 pos -= gap
             data[pos] = temp
@@ -249,7 +276,8 @@ def shell_sort(draw_info, ascending=True):
         gap //= 2
     return data
 
-""" Time Complexity: O(n log(n)) """
+
+# Time Complexity: O(n log(n))
 def heap_sort(draw_info, ascending=True):
     data = draw_info.lst
     N = len(data)
@@ -264,23 +292,28 @@ def heap_sort(draw_info, ascending=True):
         yield True
     return data
 
+
 # helper function for heap sort (fix down)
 def heapify(data, size, idx, ascending):
     temp = data[idx]
     child = 2 * idx + 1
     while child < size:
-        ascending_sort  = child + 1 < size and data[child] < data[child + 1] 
-        descending_sort = child + 1 < size and data[child] > data[child + 1] 
+        ascending_sort = child + 1 < size and data[child] < data[child + 1]
+        descending_sort = child + 1 < size and data[child] > data[child + 1]
         check_order = (ascending_sort and ascending) or (descending_sort and not ascending)
-        if (check_order): child += 1
-        if (data[child] < temp and ascending): break
-        if (data[child] > temp and not ascending): break
+        if (check_order):
+            child += 1
+        if (data[child] < temp and ascending):
+            break
+        if (data[child] > temp and not ascending):
+            break
         data[idx] = data[child]
         idx = child
         child = 2 * idx + 1
     data[idx] = temp
 
-def main():
+
+if __name__ == "__main__":
     run = True
     clock = pygame.time.Clock()
 
@@ -309,8 +342,10 @@ def main():
             draw(draw_info, sorting_algo_name, ascending)
 
         for event in pygame.event.get():
-            if event.type == pygame.QUIT: run = False
-            if event.type != pygame.KEYDOWN: continue
+            if event.type == pygame.QUIT:
+                run = False
+            if event.type != pygame.KEYDOWN:
+                continue
             if event.key == pygame.K_r:
                 data = generate_starting_list(N, MIN_VAL, MAX_VAL)
                 draw_info.set_list(data)
@@ -345,6 +380,3 @@ def main():
                 sorting_algo_name = "Quick Sort"
 
     pygame.quit()
-
-if __name__ == "__main__":
-    main()
