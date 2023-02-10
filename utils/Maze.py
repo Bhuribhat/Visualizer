@@ -77,7 +77,7 @@ class Map:
         self.set_map(2 * x + 1, 2 * y + 1, 0)
 
         checklist = [(x, y)]
-        print(f"start = {checklist[0][0] + 1, checklist[0][1] + 1}")
+        print(f"Suggest Start = {checklist[0][0] + 1, checklist[0][1] + 1}")
 
         # select a random entry from checklist
         while checklist:

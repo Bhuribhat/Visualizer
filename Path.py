@@ -18,17 +18,18 @@ WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("Path Finding Visualizer")
 
 # Initial Colors
-RED = (255, 128, 0)
-GREEN = (0, 100, 0)
-BLUE = (0, 128, 255)
-YELLOW = (255, 255, 0)
-WHITE = (255, 255, 255)
-DARK = (49, 49, 49)
-BLACK = (0, 0, 0)
-PURPLE = (128, 0, 128)
-ORANGE = (255, 165, 0)
-GREY = (129, 129, 129)
+BLACK     = (0, 0, 0)
+GREEN     = (0, 100, 0)
+DARK      = (49, 49, 49)
+DARKER    = (33, 40, 45)
+ORANGE    = (255, 165, 0)
+RED       = (255, 128, 0)
+YELLOW    = (255, 255, 0)
+BLUE      = (0, 128, 255)
+PURPLE    = (138, 91, 246)
 TURQUOISE = (64, 224, 208)
+GREY      = (129, 129, 129)
+WHITE     = (255, 255, 255)
 
 # Fonts used in UI
 LARGE_FONT = pygame.font.SysFont('comicsans', 30)
@@ -334,7 +335,7 @@ def draw_grid(win, rows, width):
 
 # draw font and list animation
 def draw_UI(window, algo_name, time, length):
-    pygame.draw.rect(window, DARK, (0, 0, WIDTH, 145))
+    pygame.draw.rect(window, DARKER, (0, 0, WIDTH, 145))
 
     title = LARGE_FONT.render(f"{algo_name} | Shortest Path = {length} | Take {time} seconds", 1, BLUE)
     window.blit(title, (WIDTH / 2 - title.get_width() / 2, 5))
@@ -408,10 +409,12 @@ def main(win, width):
                 if not start and spot != end:
                     start = spot
                     start.make_start()
+                    print(f"start = {start.get_pos()}")
 
                 elif not end and spot != start:
                     end = spot
                     end.make_end()
+                    print(f"end = {end.get_pos()}")
 
                 elif spot != end and spot != start:
                     spot.make_barrier()
@@ -483,9 +486,9 @@ def main(win, width):
                             if maze[row][col] == 1:
                                 grid[row][col + 2].make_barrier()
 
-                    # Handle right-side error
+                    # Handle right-side
                     for row in range(len(maze)):
-                        if not grid[-3][row].is_barrier:
+                        if not grid[-3][row].is_barrier():
                             grid[-2][row].reset()
 
                 if event.key == pygame.K_a:          # A - A*
