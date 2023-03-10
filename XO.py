@@ -4,15 +4,6 @@ import pygame
 import random
 import numpy as np
 
-# INSTRUCTION
-TEXT = """
-Game Instructions
-- press 'G' to change gamemode (PVP or AI)
-- press '0' to change AI level to Easy (random)
-- press '1' to change AI level to Hard (algorithm)
-- press 'R' to restart the game
-================================================ """
-
 # PIXELS
 WIDTH = 600
 HEIGHT = 600
@@ -34,7 +25,6 @@ LINE_COLOR = (23, 145, 135)
 CIRC_COLOR = (239, 231, 200)
 CROSS_COLOR = (66, 66, 66)
 
-
 # PYGAME SETUP
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -43,7 +33,12 @@ screen.fill(BG_COLOR)
 
 
 def Instruction():
-    print(TEXT)
+    print("\nGame Instructions")
+    print("- press 'G' to change gamemode (PVP or AI)")
+    print("- press '0' to change AI level to Easy (random)")
+    print("- press '1' to change AI level to Hard (algorithm)")
+    print("- press 'R' to restart the game")
+    print("================================================")
 
 
 # CLASSES
@@ -206,7 +201,6 @@ class Game:
 
     # DRAW METHODS
     def show_lines(self):
-        # background
         screen.fill(BG_COLOR)
 
         # vertical
@@ -260,7 +254,7 @@ class Game:
         self.gamemode = gamemode
 
 
-def main():
+if __name__ == '__main__':
     Instruction()
     game = Game()
     board = game.board
@@ -318,7 +312,3 @@ def main():
                     game.running = False
 
         pygame.display.update()
-
-
-if __name__ == '__main__':
-    main()

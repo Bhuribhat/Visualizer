@@ -8,25 +8,10 @@ def find_empty(board):
                 return (i, j)
     return None
 
-# state space search
-def solve(board):
-    global SOLUTION
-    find = find_empty(board)
-    if not find:
-        SOLUTION = board[::]
-        return True
-    else:
-        row, col = find
-    for i in range(1, 10):
-        if valid(board, i, (row, col)):
-            board[row][col] = i
-            if solve(board):
-                return True
-            board[row][col] = 0
-    return False
 
 # backtracking algorithm
 def valid(board, num, pos):
+
     # Check row
     for i in range(len(board[0])):
         if board[pos[0]][i] == num and pos[1] != i:
@@ -45,8 +30,25 @@ def valid(board, num, pos):
         for j in range(box_x * 3, box_x * 3 + 3):
             if board[i][j] == num and (i, j) != pos:
                 return False
-
     return True
+
+
+# state space search
+def solve(board):
+    global SOLUTION
+    find = find_empty(board)
+    if not find:
+        SOLUTION = board[::]
+        return True
+    else:
+        row, col = find
+    for i in range(1, 10):
+        if valid(board, i, (row, col)):
+            board[row][col] = i
+            if solve(board):
+                return True
+            board[row][col] = 0
+    return False
 
 
 # display solution

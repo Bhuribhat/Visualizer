@@ -1,17 +1,9 @@
 import time
 import pygame
-
-from utils.Sudoku_Board import generate_sudoku
 pygame.font.init()
 
-
-# Constant
-WHITE = (255, 255, 255)
-GREY = (128, 128, 128)
-DARK = (49, 49, 49)
-BLACK = (0, 0, 0)
-ORANGE = (255, 165, 0)
-RED = (255, 0, 0)
+from utils.Sudoku_Board import generate_sudoku
+from utils.Sudoku_Solver import print_board
 
 INSTRUCTION = """
 === Sudoku GUI : 5 lives ===
@@ -23,12 +15,19 @@ INSTRUCTION = """
 6. 'R' to reset board
 7. 'N' to create new game
 8. 'Space Bar' to show solution (sketch)
-9. 'Arrow Key' to navigate through grid
-"""
+9. 'Arrow Key' to navigate through grid """
+
+# COLORS
+WHITE  = (255, 255, 255)
+GREY   = (128, 128, 128)
+DARK   = (49, 49, 49)
+BLACK  = (0, 0, 0)
+ORANGE = (255, 165, 0)
+RED    = (255, 0, 0)
 
 
+# board = initBoard
 class Grid:
-    # board = initBoard
     solution, board = generate_sudoku()
 
     def __init__(self, rows, cols, width, height):
@@ -62,7 +61,7 @@ class Grid:
         row, col = self.selected
         self.cubes[row][col].set_temp(val)
 
-    def draw(self, win):
+    def draw(self, window):
         # Draw Grid Lines
         gap = self.width / 9
         for i in range(self.rows + 1):
@@ -70,13 +69,13 @@ class Grid:
                 thick = 4
             else:
                 thick = 2
-            pygame.draw.line(win, BLACK, (0, i * gap), (self.width, i * gap), thick)
-            pygame.draw.line(win, BLACK, (i * gap, 0), (i * gap, self.height), thick)
+            pygame.draw.line(window, BLACK, (0, i * gap), (self.width, i * gap), thick)
+            pygame.draw.line(window, BLACK, (i * gap, 0), (i * gap, self.height), thick)
 
         # Draw Cubes
         for i in range(self.rows):
             for j in range(self.cols):
-                self.cubes[i][j].draw(win)
+                self.cubes[i][j].draw(window)
 
     def select(self, row, col):
         # Reset all other
@@ -123,7 +122,7 @@ class Cube:
         self.height = height
         self.selected = False
 
-    def draw(self, win):
+    def draw(self, window):
         fnt = pygame.font.SysFont("comicsans", 35)
 
         gap = self.width / 9
@@ -133,23 +132,23 @@ class Cube:
         # Draw Grid Line
         if self.temp != 0 and self.value == 0:
             text = fnt.render(str(self.temp), 1, GREY)
-            win.blit(text, (x + 5, y + 5))
+            window.blit(text, (x + 5, y + 5))
         elif not self.value == 0:
             text = fnt.render(str(self.value), 1, WHITE)
-            win.blit(text, (x + (gap / 2 - text.get_width() / 2), y + (gap / 2 - text.get_height() / 2)))
+            window.blit(text, (x + (gap / 2 - text.get_width() / 2), y + (gap / 2 - text.get_height() / 2)))
 
         # Draw Selected
         if self.selected:
-            pygame.draw.rect(win, ORANGE, (x, y, gap, gap), 3)
+            pygame.draw.rect(window, ORANGE, (x, y, gap, gap), 3)
 
         # Draw Game Over
         FONT = pygame.font.SysFont("comicsans", 70)
         if game_state == -1:
             title = FONT.render("Game Over", 1, RED)
-            win.blit(title, (270 - title.get_width() / 2, 220))
+            window.blit(title, (270 - title.get_width() / 2, 220))
         elif game_state == 1:
             title = FONT.render("You Win!!", 1, ORANGE)
-            win.blit(title, (270 - title.get_width() / 2, 220))
+            window.blit(title, (270 - title.get_width() / 2, 220))
 
     def set(self, val):
         self.value = val
@@ -158,57 +157,36 @@ class Cube:
         self.temp = val
 
 
-def redraw_window(win, board, time, strikes):
-    win.fill(DARK)
+def redraw_window(window, board, playtime, strikes):
+    window.fill(DARK)
 
-    # Draw time
+    # Draw playtime
     fnt = pygame.font.SysFont("comicsans", 28)
-    text = fnt.render("Time: " + format_time(time), 1, WHITE)
-    win.blit(text, (540 - 190, 560))
+    text = fnt.render(f"Time:  {format_time(playtime)}", 1, WHITE)
+    window.blit(text, (540 - 190, 560))
 
     # Draw Strikes
     text = fnt.render("X " * strikes, 1, RED)
-    win.blit(text, (20, 560))
+    window.blit(text, (20, 560))
 
     # Draw grid and board
-    board.draw(win)
+    board.draw(window)
 
 
-# format time to be shown in UI
+# format playtime to be shown in UI
 def format_time(secs):
-    sec = secs % 60
+    second = secs % 60
     minute = secs // 60
     hour = minute // 60
-    total = f" {str(hour)}:{str(minute)}:{sec}"
-    return total
-
-
-# display solution
-def print_board(solution):
-    count, col = 0, 0
-    edge = '+' + '-' * 7
-    print('Solution')
-    print('\n' + edge * 3 + '+')
-    for row in solution:
-        for num in row:
-            if count == 9:
-                print('|')
-                count = 0
-                col += 1
-                if col % 3 == 0:
-                    print(edge * 3 + '+')
-            if count % 3 == 0:
-                print('|', end=' ')
-            count += 1
-            print(num, end=' ')
-    print('|\n' + edge * 3 + '+')
+    return f"{hour}:{minute}:{second}"
 
 
 def main():
     global game_state
     game_state = 0
-    win = pygame.display.set_mode((540, 600))
+    window = pygame.display.set_mode((540, 600))
     pygame.display.set_caption("Sudoku")
+
     board = Grid(9, 9, 540, 540)
     key = None
     run = True
@@ -305,9 +283,9 @@ def main():
                     location = temp
                     board.select(*temp)
                     key = None
-                    show_solution(board.solution)
+                    print_board(board.solution)
                 if event.key == pygame.K_i:
-                    print('\n' + INSTRUCTION + '\n')
+                    print(f'\n{INSTRUCTION}\n')
 
                 if event.key == pygame.K_UP:
                     y_pos = (location[0] - 1) % 9
@@ -337,7 +315,7 @@ def main():
             board.sketch(key)
 
         # if game_state == 0:
-        redraw_window(win, board, play_time, strikes)
+        redraw_window(window, board, play_time, strikes)
         pygame.display.update()
 
 

@@ -64,7 +64,7 @@ class Map:
         # if not find any unvisited adjacent entry
         return False
 
-    # '#' is wall and '.' is path
+    # Notation '#' is wall and '.' is path
     def display_maze(self):
         for row in self.map:
             display = ["#" if cell == 1 else "." for cell in row]
