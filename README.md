@@ -27,6 +27,31 @@ This program show the shortest path between two point
 </p>
 
 
+# Roomba Path Finding
+
+This program show the shortest path between two point in the map  
+Using a `Image_Grid.py` to create grid from `map.png`  
+
+<p align="left">
+    <img src="./assets/map_grid.png" width="800" />
+</p>
+
+
+**Instruction:**
+
+<kbd>left click</kbd> to select a position and perform a shortest path
+
+**Usage:**
+
+```sh
+>> py Roomba.py
+```
+
+<p align="left">
+    <img src="./assets/roomba_gameplay.png" width="800" />
+</p>
+
+
 # Sort Algorithm
 
 This program compare the sorting algorithms  
@@ -111,3 +136,5 @@ Minimax algorithm: backtracking decision making to find the optimal move
 - [tech with tim path finding algorithm](https://www.youtube.com/watch?v=JtiK0DOeI4A)
 - [Prim Algorithm](https://medium.com/swlh/fun-with-python-1-maze-generator-931639b4fb7e)
 - [Python maze search](https://github.com/marblexu/PythonMazeSearch)
+- [Path Finding](https://github.com/brean/python-pathfinding)
+- [Roomba Path Finding](https://github.com/clear-code-projects/Python-Pathfinder)
