@@ -140,9 +140,9 @@ This program visualizes the `Container With Most Water` problem in LeetCode
 2. <kbd>New</kbd> to clear all of the canvas graph and title
 3. <kbd>Save</kbd> to save plotted graph in `assets` folder
 4. <kbd>Undo</kbd> to pop the last histogram
-5. <kbd>Redo</kbd> to append the last histogram which have been popped
-6. <kbd>Annotate</kbd> to turn on/off histogram height
-6. <kbd>Water</kbd> to turn on/off water container
+5. <kbd>Redo</kbd> to append the last popped histogram
+6. <kbd>Annotate</kbd> to switch between on/off of histogram height visualize
+6. <kbd>Water</kbd> to switch between on/off of water container visualize
 7. <kbd>Random Histogram</kbd> to random generate (5-100) histogram's height
 7. <kbd>Normal Distribution</kbd> to generate normal distribution with random mean and std
 
