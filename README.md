@@ -1,6 +1,6 @@
 # Path Finding Algorithm
 
-This program show the shortest path between two point  
+This program shows the shortest path between two point  
 **Instruction:**
 
 1.  <kbd>left click</kbd> to create two points to find the shortest path (2 times)
@@ -29,7 +29,7 @@ This program show the shortest path between two point
 
 # Roomba Path Finding
 
-This program show the shortest path between two point in the map  
+This program shows the shortest path between two point in the map  
 Using a `Image_Grid.py` to create grid from `map.png`  
 
 <p align="left">
@@ -54,7 +54,7 @@ Using a `Image_Grid.py` to create grid from `map.png`
 
 # Sort Algorithm
 
-This program compare the sorting algorithms  
+This program compares the sorting algorithms  
 **Instruction:**
 
 1. <kbd>Space Bar</kbd> to show result
@@ -83,7 +83,7 @@ This program compare the sorting algorithms
 
 # Sudoku
 
-This program generate sudoku board and its solution  
+This program generates sudoku board and its solution  
 **Instruction:**
 
 1. <kbd>Click</kbd> to select the grid
@@ -103,8 +103,8 @@ This program generate sudoku board and its solution
 ```
 
 <p align="left">
-    <img src="./assets/sudoku_gameplay.png" height="400" />
-    <img src="./assets/sudoku_solution.png" height="400" />
+    <img src="./assets/sudoku_gameplay.png" width="400" />
+    <img src="./assets/sudoku_solution.png" width="400" />
 </p>
 
 
@@ -126,9 +126,37 @@ Minimax algorithm: backtracking decision making to find the optimal move
 ```
 
 <p align="left">
-    <img src="./assets/xo_gameplay.png" height="400" />
-    <img src="./assets/xo_result.png" height="400" />
+    <img src="./assets/xo_gameplay.png" width="400" />
+    <img src="./assets/xo_result.png" width="400" />
 </p>
+
+
+# Container With Most Water
+
+This program visualizes the `Container With Most Water` problem in LeetCode  
+**Instruction:**
+
+1. <kbd>Type</kbd> height array in Height Entry then <kbd>Add</kbd> to display
+2. <kbd>New</kbd> to clear all of the canvas graph and title
+3. <kbd>Save</kbd> to save plotted graph in `assets` folder
+4. <kbd>Undo</kbd> to pop the last histogram
+5. <kbd>Redo</kbd> to append the last histogram which have been popped
+6. <kbd>Annotate</kbd> to turn on/off histogram height
+6. <kbd>Water</kbd> to turn on/off water container
+7. <kbd>Random Histogram</kbd> to random generate (5-100) histogram's height
+7. <kbd>Normal Distribution</kbd> to generate normal distribution with random mean and std
+
+**Usage:**
+
+```sh
+>> py Container.py
+```
+
+<p align="left">
+    <img src="./assets/Histogram.png" width="400" />
+    <img src="./assets/distribution.png" width="400" />
+</p>
+
 
 # Resource
 
