@@ -158,6 +158,30 @@ This program visualizes the `Container With Most Water` problem in LeetCode
 </p>
 
 
+# Regression
+
+This program visualizes the `Regression` graph in form of `linear`, `non-linear`, and `logistic`
+**Instruction:**
+
+1. <kbd>Type</kbd> x array in X Entry
+2. <kbd>Type</kbd> y array in Y Entry
+3. <kbd>Add</kbd> to display to graph
+4. <kbd>Save</kbd> to save graph in `assets` folder
+5. <kbd>Clear</kbd> to clear all of the canvas graph and title
+6. <kbd>Select</kbd> model to display in canvas graph and title
+
+**Usage:**
+
+```sh
+>> py Regression.py
+```
+
+<p align="left">
+    <img src="./assets/linear_reg.png" width="400" />
+    <img src="./assets/polynomial.png" width="400" />
+</p>
+
+
 # Resource
 
 - [tech with tim sorting algorithm](https://www.youtube.com/watch?v=twRidO-_vqQ)

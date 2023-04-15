@@ -243,7 +243,7 @@ if __name__ == '__main__':
 
     file_menu = Menu(main_menu, tearoff=0)
     file_menu.add_command(label="New", command=lambda: clear(y_points))
-    file_menu.add_command(label="Save", command=lambda: plt.savefig('./asstes/Histogram.png'))
+    file_menu.add_command(label="Save", command=lambda: plt.savefig('./assets/Histogram.png'))
     file_menu.add_separator()
     file_menu.add_command(label="Undo", command=lambda: pop_height(y_points))
     file_menu.add_command(label="Redo", command=lambda: redo_action(y_points))
