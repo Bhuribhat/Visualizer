@@ -130,3 +130,6 @@ dmypy.json
 
 # Folder config file
 [Dd]esktop.ini
+
+# test
+test.py

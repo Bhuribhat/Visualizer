@@ -158,6 +158,32 @@ This program visualizes the `Container With Most Water` problem in LeetCode
 </p>
 
 
+# Minimum Cost to Connect All Points
+
+This program visualizes the `Minimum Cost to Connect All Points` problem in LeetCode  
+**Instruction:**
+
+1. <kbd>Type</kbd> x array in X Entry
+2. <kbd>Type</kbd> y array in Y Entry
+3. <kbd>Add</kbd> to display minimum spanning tree
+2. <kbd>New</kbd> or <kbd>Clear</kbd> to clear all of the canvas graph and title
+3. <kbd>Save</kbd> to save plotted graph in `assets` folder
+4. <kbd>Undo</kbd> to pop the last x, y
+5. <kbd>Redo</kbd> to append the last popped x, y
+7. <kbd>Random MST</kbd> to random generate minimum spanning tree
+
+**Usage:**
+
+```sh
+>> py MST.py
+```
+
+<p align="left">
+    <img src="./assets/mst1.png" width="400" />
+    <img src="./assets/mst2.png" width="400" />
+</p>
+
+
 # Regression
 
 This program visualizes the `Regression` graph in form of `linear`, `non-linear`, and `logistic`
@@ -165,7 +191,7 @@ This program visualizes the `Regression` graph in form of `linear`, `non-linear`
 
 1. <kbd>Type</kbd> x array in X Entry
 2. <kbd>Type</kbd> y array in Y Entry
-3. <kbd>Add</kbd> to display to graph
+3. <kbd>Add</kbd> to display regression graph
 4. <kbd>Save</kbd> to save graph in `assets` folder
 5. <kbd>Clear</kbd> to clear all of the canvas graph and title
 6. <kbd>Select</kbd> model to display in canvas graph and title
