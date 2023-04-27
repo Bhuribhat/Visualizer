@@ -208,6 +208,15 @@ This program visualizes the `Regression` graph in form of `linear`, `non-linear`
 </p>
 
 
+# N-Puzzle
+
+This program visualizes the `8-Puzzle` solved by A* Search
+
+<p align="left">
+    <img src="./assets/N_Puzzle.gif" width="400" />
+</p>
+
+
 # Resource
 
 - [tech with tim sorting algorithm](https://www.youtube.com/watch?v=twRidO-_vqQ)
