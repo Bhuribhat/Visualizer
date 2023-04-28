@@ -247,7 +247,6 @@ Expected final state:
 ```
 
 <p align="left">
-    <img src="./assets/initial_state.png" width="400" />
     <img src="./assets/N_Puzzle.gif" width="400" />
 </p>
 
