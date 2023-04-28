@@ -210,9 +210,44 @@ This program visualizes the `Regression` graph in form of `linear`, `non-linear`
 
 # N-Puzzle
 
-This program visualizes the `8-Puzzle` solved by A* Search
+This program visualizes the `8-Puzzle` solved by A* 
+**Instruction:**
+
+1. Create an animation that illustrates each steps in solution
+2. Return `None` if there is no such solution
+3. `0` represents empty slot that should be in top left corner
+4. Plot each steps in subplots
+
+**Example:**
+
+```
+Initial state of game:
++---+---+---+
+| 1 | 6 | 0 |
++---+---+---+
+| 7 | 2 | 4 |
++---+---+---+
+| 8 | 5 | 3 |
++---+---+---+
+
+Expected final state:
++---+---+---+
+| 0 | 1 | 2 |
++---+---+---+
+| 3 | 4 | 5 |
++---+---+---+
+| 6 | 7 | 8 |
++---+---+---+
+```
+
+**Usage:**
+
+```sh
+>> N_Puzzle.ipynb
+```
 
 <p align="left">
+    <img src="./assets/initial_state.png" width="400" />
     <img src="./assets/N_Puzzle.gif" width="400" />
 </p>
 
