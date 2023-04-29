@@ -186,7 +186,7 @@ This program visualizes the `Minimum Cost to Connect All Points` problem in Leet
 
 # Regression
 
-This program visualizes the `Regression` graph in form of `linear`, `non-linear`, and `logistic`
+This program visualizes the `Regression` graph in form of `linear`, `non-linear`, and `logistic`  
 **Instruction:**
 
 1. <kbd>Type</kbd> x array in X Entry
@@ -210,7 +210,7 @@ This program visualizes the `Regression` graph in form of `linear`, `non-linear`
 
 # N-Puzzle
 
-This program visualizes the `8-Puzzle` solved by A* 
+This program visualizes the `8-Puzzle` solved by A* Search  
 **Instruction:**
 
 1. Create an animation that illustrates each steps in solution
@@ -259,3 +259,4 @@ Expected final state:
 - [Python maze search](https://github.com/marblexu/PythonMazeSearch)
 - [Path Finding](https://github.com/brean/python-pathfinding)
 - [Roomba Path Finding](https://github.com/clear-code-projects/Python-Pathfinder)
+- [8 Puzzle](https://github.com/abpaudel/8-puzzle)
