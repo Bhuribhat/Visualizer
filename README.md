@@ -210,7 +210,8 @@ This program visualizes the `Regression` graph in form of `linear`, `non-linear`
 
 # N-Puzzle
 
-This program visualizes the `8-Puzzle` solved by A* Search  
+This program visualizes the `8-Puzzle` solved using A* Search,  
+Use `N_Puzzle.ipynb` to animates the solution  
 **Instruction:**
 
 1. Create an animation that illustrates each steps in solution
@@ -243,7 +244,7 @@ Expected final state:
 **Usage:**
 
 ```sh
->> N_Puzzle.ipynb
+>> py Puzzle.py
 ```
 
 <p align="left">
