@@ -84,7 +84,25 @@ This program compares the sorting algorithms
 # Sudoku
 
 This program generates sudoku board and its solution  
-**Instruction:**
+Use `Sudoku_Solver.py` in `utils` to solve [online sudoku](https://sudoku.com/) automatically  
+
+__Note:__ You have 5 seconds to move your cursor to **Top Left** corner of the board  
+
+**Usage:**
+
+```sh
+>> cd utils
+>> py Sudoku_Solver.py
+```
+
+<p align="left">
+    <img src="./assets/online_sudoku_init.png" width="400" />
+    <img src="./assets/online_sudoku_final.png" width="400" />
+</p>
+
+To use GUI, please follow the instruction below:
+
+**Instruction:**  
 
 1. <kbd>Click</kbd> to select the grid
 2. <kbd>1-9</kbd> to sketch number and <kbd>Enter</kbd> to confirm
@@ -211,7 +229,7 @@ This program visualizes the `Regression` graph in form of `linear`, `non-linear`
 # N-Puzzle
 
 This program visualizes the `8-Puzzle` solved using A* Search,  
-Use `N_Puzzle.ipynb` to animates the solution  
+Use `N_Puzzle.ipynb` to animate the solution  
 **Instruction:**
 
 1. Create an animation that illustrates each steps in solution
@@ -261,3 +279,4 @@ Expected final state:
 - [Path Finding](https://github.com/brean/python-pathfinding)
 - [Roomba Path Finding](https://github.com/clear-code-projects/Python-Pathfinder)
 - [8 Puzzle](https://github.com/abpaudel/8-puzzle)
+- [Sudoku Solver](https://github.com/Terranova-Python/Sudoku-Auto-Solver/blob/master/Main.py)

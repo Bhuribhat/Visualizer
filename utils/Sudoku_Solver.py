@@ -1,4 +1,7 @@
 import copy
+import time
+import pyautogui as pg 
+
 
 # return (row, col)
 def find_empty(board):
@@ -51,6 +54,32 @@ def solve(board):
     return False
 
 
+# automatically solver in https://sudoku.com/
+# NOTE Place your cursor at Top-Left of the board
+def auto_solve(board):
+    solution = []
+    for row in board:
+        for number in row:
+            solution.append(str(number))
+
+    counter = 0
+    for number in solution:
+        pg.press(number)
+        pg.hotkey('right')
+        counter += 1
+
+        if counter % 9 == 0:
+            pg.hotkey('down')
+            pg.hotkey('left')
+            pg.hotkey('left')
+            pg.hotkey('left')
+            pg.hotkey('left')
+            pg.hotkey('left')
+            pg.hotkey('left')
+            pg.hotkey('left')
+            pg.hotkey('left')
+
+
 # display solution
 def print_board(solution):
     count, col = 0, 0
@@ -73,18 +102,26 @@ def print_board(solution):
 
 if __name__ == '__main__':
     initBoard = [
-        [7, 8, 0, 4, 0, 0, 1, 2, 0],
-        [6, 0, 0, 0, 7, 5, 0, 0, 9],
-        [0, 0, 0, 6, 0, 1, 0, 7, 8],
-        [0, 0, 7, 0, 4, 0, 2, 6, 0],
-        [0, 0, 1, 0, 5, 0, 9, 3, 0],
-        [9, 0, 4, 0, 6, 0, 0, 0, 5],
-        [0, 7, 0, 3, 0, 0, 0, 1, 2],
-        [1, 2, 0, 0, 0, 7, 4, 0, 0],
-        [0, 4, 9, 2, 0, 6, 0, 0, 7]
+        [3, 0, 0, 0, 1, 0, 4, 0, 0],
+        [0, 0, 2, 0, 5, 0, 0, 0, 0],
+        [8, 0, 0, 4, 0, 2, 0, 6, 0],
+        [0, 3, 0, 0, 0, 0, 0, 5, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 9, 8, 0, 4, 3, 0, 0],
+        [0, 0, 0, 0, 2, 0, 0, 0, 0],
+        [0, 0, 8, 3, 0, 9, 5, 0, 0],
+        [6, 0, 0, 0, 0, 0, 0, 0, 7]
     ]
     board = copy.deepcopy(initBoard)
     if solve(board):
         print_board(board)
     else:
         print("There is no solution")
+    
+    autoSolver = input("Use Auto-Solver (Y/N)? ").upper().strip()
+    if autoSolver.startswith('Y'):
+        for i in range(5):
+            print(f"{5 - i}..")
+            time.sleep(1)
+        print("Start solving now!")
+        auto_solve(board)
