@@ -71,19 +71,19 @@ def format_factors(prime_factors):
             exponent += 1
         
         # math_expression = '{' + str(exponent - 1) + '}'
-        factor_string += f" ({factor}^{exponent - 1}) x"
+        factor_string += f" {factor}^{exponent - 1} \cdot"
 
         primes.append(factor)
         exponents.append(exponent - 1)
 
     if factor_string:
-        result_label.config(text=f"{number} = {factor_string[1:-1]}", fg=YELLOW)
-    elif number >= 1:
-        result_label.config(text=f"{number} = 1 x {number}", fg=YELLOW)
+        result_label.config(text=f'{number} is not a Prime Number', fg=YELLOW)
+    elif number >= 2:
+        result_label.config(text=f"{number} is a Prime Number", fg=YELLOW)
     else:
         result_label.config(text="Please Enter a Positive Number!", fg='red')
 
-    return primes, exponents
+    return primes, exponents, factor_string
 
 
 def plot_factors():
@@ -96,13 +96,12 @@ def plot_factors():
     prime_factors = [i for i in factors if is_prime(i)]
 
     if is_prime(number):
-        print(f"{number} is a prime number")
         result_label.config(text=f"{number} = 1 x {number}", fg=YELLOW)
         primes, exponents = [1, number], [1, 1]
+        factor_string = ""
         format_color = "red"
     else:
-        print(f'{number} is NOT a prime number')
-        primes, exponents = format_factors(prime_factors)
+        primes, exponents, factor_string = format_factors(prime_factors)
         format_color = "lime"
 
     AX = figure.add_subplot()
@@ -111,10 +110,12 @@ def plot_factors():
     AX.tick_params(axis='y', colors='white')
     AX.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
 
-    plt.bar(primes, exponents)
+    x_values = range(len(exponents))
+    plt.bar(x_values, exponents)
+    plt.xticks(x_values, primes)
 
     fontsize = 10 - (len(exponents) // 20)
-    for x, y in zip(primes, exponents):
+    for x, y in zip(x_values, exponents):
         plt.annotate(f"{y}",
             xy=(x, y),
             xytext=(0, 0.3),
@@ -123,9 +124,13 @@ def plot_factors():
             color=PURPLE, fontsize=fontsize
         )
 
+    if factor_string:
+        plt.title(f"{number:,} = ${factor_string[1:-6]}$", color=PURPLE, fontsize=14)
+    else:
+        plt.title(f"{number:,} = 1 x {number:,}", color=PURPLE, fontsize=14)
+
     plt.xlabel('Prime Factors', color='white')
     plt.ylabel('Exponents', color='white')
-    plt.title(f"Prime Factors of {number}", color=PURPLE, fontsize=14)
     plt.yticks([])
 
     # canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
