@@ -226,6 +226,26 @@ This program visualizes the `Regression` graph in form of `linear`, `non-linear`
 </p>
 
 
+# Prime Factors
+
+This program visualizes the `Prime Factors` in form of `bar graph`  
+**Instruction:**
+
+1. <kbd>Type</kbd> a positive number
+2. <kbd>Plot Factors</kbd> to visualize prime number
+
+**Usage:**
+
+```sh
+>> py Prime_Factor.py
+```
+
+<p align="left">
+    <img src="./assets/prime1.png" width="400" />
+    <img src="./assets/prime2.png" width="400" />
+</p>
+
+
 # N-Puzzle
 
 This program visualizes the `8-Puzzle` solved using A* Search,  
