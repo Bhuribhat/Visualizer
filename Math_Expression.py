@@ -4,7 +4,24 @@ DEBUG = False
 operators = ["+", "-", "*", "/", "//", "%", "**"]
 
 
-def add_parentheses(expression):
+def format_expr(expression: str) -> str:
+    formatted_expression = ""
+    idx = 0
+    while idx < len(expression):
+        char = expression[idx]
+        if char in operators and idx + 1 < len(expression):
+            if char == expression[idx + 1]:
+                formatted_expression += f" {char + expression[idx + 1]} "
+                idx += 1
+            else:
+                formatted_expression += f" {char} "
+        else:
+            formatted_expression += char
+        idx += 1
+    return formatted_expression.strip()
+
+
+def add_parentheses(expression: list[str]) -> list[list[str]]:
     def evaluate_expression(exp):
         try:
             return eval(''.join(exp))
@@ -29,7 +46,7 @@ def add_parentheses(expression):
     return add_parentheses_recursive(expression, 0, len(expression) - 1)
 
 
-def find_pattern(result, numbers, operators):
+def find_pattern(result: int, numbers: list[int]) -> str | None:
     num_repeat = len(numbers) - 1
 
     # for permutation in list(permutations(numbers)):
@@ -39,7 +56,7 @@ def find_pattern(result, numbers, operators):
             expression += [str(num)]
             if i < len(op_combination):
                 expression += [op_combination[i]]
-        
+
         # Calculate Expression
         parentheses = add_parentheses(expression)
         for math_expr in parentheses:
@@ -54,11 +71,12 @@ def find_pattern(result, numbers, operators):
 
 
 if __name__ == '__main__':
-    result = 9
-    numbers = [3, 7, 5]
+    number = list(map(int, input("Enter numbers: ").split()))   # [3, 7, 5]
+    result = int(input("Enter result: ").strip())               # 10
 
-    pattern = find_pattern(result, numbers, operators)
-    if pattern:
-        print(f"{result} = {pattern}")
-    else:
-        print("No pattern found.")
+    for iterate in range(result + 1):
+        pattern = find_pattern(iterate, number)
+        if pattern:
+            print(f"{iterate} = {format_expr(pattern)}")
+        else:
+            print(f"No pattern found for {iterate}")
