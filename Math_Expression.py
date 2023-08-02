@@ -71,12 +71,15 @@ def find_pattern(result: int, numbers: list[int]) -> str | None:
 
 
 if __name__ == '__main__':
-    number = list(map(int, input("Enter numbers: ").split()))   # [3, 7, 5]
-    result = int(input("Enter result: ").strip())               # 10
+    number = list(map(int, input("Enter numbers: ").split()))
+    result = int(input("Enter result: ").strip())
+    length = len(str(result))
+    print()
 
     for iterate in range(result + 1):
         pattern = find_pattern(iterate, number)
+        space = ' ' * (length - len(str(iterate)))
         if pattern:
-            print(f"{iterate} = {format_expr(pattern)}")
+            print(f"{iterate}{space} = {format_expr(pattern)}")
         else:
             print(f"No pattern found for {iterate}")

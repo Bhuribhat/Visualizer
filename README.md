@@ -18,7 +18,7 @@ This program shows the shortest path between two point
 **Usage:**
 
 ```sh
->> py Path.py
+>> python Path.py
 ```
 
 <p align="left">
@@ -44,7 +44,7 @@ Using a `Image_Grid.py` to create grid from `map.png`
 **Usage:**
 
 ```sh
->> py Roomba.py
+>> python Roomba.py
 ```
 
 <p align="left">
@@ -72,7 +72,7 @@ This program compares the sorting algorithms
 **Usage:**
 
 ```sh
->> py Sort.py
+>> python Sort.py
 ```
 
 <p align="left">
@@ -92,7 +92,7 @@ __Note:__ You have 5 seconds to move your cursor to **Top Left** corner of the b
 
 ```sh
 >> cd utils
->> py Sudoku_Solver.py
+>> python Sudoku_Solver.py
 ```
 
 <p align="left">
@@ -117,7 +117,7 @@ To use GUI, please follow the instruction below:
 **Usage:**
 
 ```sh
->> py Sudoku.py
+>> python Sudoku.py
 ```
 
 <p align="left">
@@ -140,7 +140,7 @@ Minimax algorithm: backtracking decision making to find the optimal move
 **Usage:**
 
 ```sh
->> py XO.py
+>> python XO.py
 ```
 
 <p align="left">
@@ -167,7 +167,7 @@ This program visualizes the `Container With Most Water` problem in LeetCode
 **Usage:**
 
 ```sh
->> py Container.py
+>> python Container.py
 ```
 
 <p align="left">
@@ -193,7 +193,7 @@ This program visualizes the `Minimum Cost to Connect All Points` problem in Leet
 **Usage:**
 
 ```sh
->> py MST.py
+>> python MST.py
 ```
 
 <p align="left">
@@ -217,7 +217,7 @@ This program visualizes the `Regression` graph in form of `linear`, `non-linear`
 **Usage:**
 
 ```sh
->> py Regression.py
+>> python Regression.py
 ```
 
 <p align="left">
@@ -237,7 +237,7 @@ This program visualizes the `Prime Factors` in form of `bar graph`
 **Usage:**
 
 ```sh
->> py Prime_Factor.py
+>> python Prime_Factor.py
 ```
 
 <p align="left">
@@ -282,12 +282,45 @@ Expected final state:
 **Usage:**
 
 ```sh
->> py Puzzle.py
+>> python Puzzle.py
 ```
 
 <p align="left">
     <img src="./assets/N_Puzzle.gif" width="400" />
 </p>
+
+
+# Mathematics Expression
+
+This program display a list of math expression solution for every number from **0 to result** using a combination of `+ - * / % ** //` operators and `list of input numbers`  
+**Instruction:**
+
+1. Enter a list of numbers (e.g., 3 7 5 9)
+2. Enter a result number (e.g., 10)
+
+**Usage:**
+
+```sh
+>> python Math_Expression.py
+```
+
+**Example:**
+```
+Enter numbers: 3 7 5 9
+Enter result: 10
+
+0  = ((3 + (7 - 5)) // 9)
+1  = ((3 + (7 + 5)) // 9)
+2  = ((3 + (7 * 5)) % 9)
+3  = (3 + ((7 - 5) // 9))
+4  = (3 + ((7 + 5) // 9))
+5  = (3 + (7 - (5 % 9)))
+6  = (3 + (7 + (5 - 9)))
+7  = (3 + ((7 ** 5) % 9))
+8  = (((3 - 7) // 5) + 9)
+9  = (((3 + 7) % 5) + 9)
+10 = (3 + (7 + (5 // 9)))
+```
 
 
 # Resource
